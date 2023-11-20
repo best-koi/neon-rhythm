@@ -1,0 +1,40 @@
+To even convert things into a JSON, you need to manually add the Newtonsoft.Json package to Unity.
+
+----Newtonsoft.Json Tutorial----
+1. Go to Package Manager and click on the "+" icon.
+  1a. Add the package by name "com.unity.nuget.newtonsoft-json".
+----Newtonsoft.Json Tutorial----
+
+Afterwards, the save system shouldn't be throwing a bunch of errors at you in the editor.
+Serializing objects with the save system requires some very specific implementation rules.
+
+----Container Class Tutorial----
+1. You must make a [System.Serializable] class containing all the data you want to save and load.
+2. All data you want to serialize in this class must be public.
+  2a. Doesn't matter if it is a field or property, at least one of the two must be public for serialization.
+  2b. Unserialiable fields like Actions and GameObjects will throw an error if not tagged [Newtonsoft.Json.JsonIgnore].
+	2ba. However, if you need to serialize only part of a GameObject's data, you could save it as various ints or strings if possible.
+	2bb. There should be no reason to serialize an Action, Func, or delegate anyways.
+3. This class can have functions and a constructor like any other class, it will still save the data correctly.
+----Container Class Tutorial----
+
+Once this container class is made, you can use it within the game's code however you like during runtime.
+All changes to the data within the container you wish to keep should be saved at some point.
+
+----Saving and Loading Data Tutorial----
+1. To save and load the data with your container, create a JsonDataPersistence object and fully initialize it.
+2. To save call its SaveData<T>() function.
+  2a. You will need to provide the path to the data (/settings.json for example) and the container T you are saving.
+3. To load call its LoadData<T>() function.
+  3a. You will need to provide the path to the data (/settings.json for example) and store the data into a variable of type T.
+4. There is also a DeleteData() function if you care about it.
+----Saving and Loading Data Tutorial----
+
+You should only have to save the data periodically, such as between scenes, application close or chooses to save within the menus.
+You can implement multiple save files easily by having a int denoting the file's number and appending it to the path's name.
+Ensure you are using the right file's path when saving data, or else this will result in major data loss.
+Similarly with loading, it should only happen when the data from file is needed, otherwise the container has everything for runtime.
+
+All the data needed during runtime can say inside of the container class
+You can make changes directly to that container class if you need to during runtime, make sure it saves to file when needed.
+
