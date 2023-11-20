@@ -180,7 +180,7 @@ public class JSONRead : MonoBehaviour
             AdjustHealth(-1f); //Removes one health because a note was missed
         }
 
-        healthBar.value = (playerHealth/10f); //Sets visible value on healthbar to be a percentage assuming total health is 10HP
+        healthBar.value = (playerHealth/50f); //Sets visible value on healthbar to be a percentage assuming total health is 10HP
         scoreText.SetText("Score: " + playerScore); //Updates score value in text element each frame
 
         currentNoteTime += Time.deltaTime; //Increments time
@@ -292,19 +292,19 @@ public class JSONRead : MonoBehaviour
         if (accuracy < successTimeLeeway) //Perfect note placement
         {
             AdjustScore(200f); //Gives 200 score for a perfect note
-            AdjustHealth(0.25f); //Gives the player 0.25 HP for a successful note placement
+            AdjustHealth(2f); //Gives the player 0.25 HP for a successful note placement
             return true; //Note was hit
         }
         else if (accuracy < greatTimeLeeway) //Great note placement
         {
             AdjustScore(100f); //Gives 100 score for a great note
-            AdjustHealth(0.25f); //Gives the player 0.25 HP for a successful note placement
+            AdjustHealth(2f); //Gives the player 0.25 HP for a successful note placement
             return true; //Note was hit
         }
         else if (accuracy < goodTimeLeeway) //Good note placement
         {
             AdjustScore(50f); //Gives 50 score for a good note
-            AdjustHealth(0.25f); //Gives the player 0.25 HP for a successful note placement
+            AdjustHealth(2f); //Gives the player 0.25 HP for a successful note placement
             return true; //Note was hit
         }
         else //Early note press
