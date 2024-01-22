@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 
@@ -8,12 +9,15 @@ public class ArrowSpawner : MonoBehaviour
     public GameObject arrowToSpawn;
     private RectTransform rectTransform;
     private Vector3 spawnLocation;
+    private List<GameObject> spawnedArrows;
 
     void Start()
     {
+        spawnedArrows = new List<GameObject>();
         rectTransform = this.GetComponent<RectTransform>();
         spawnLocation = new Vector3(rectTransform.localPosition.x, rectTransform.localPosition.y, rectTransform.localPosition.z);
         JSONRead.onSpawnNote += SpawnArrowAbsolute;
+        JSONRead.onPlayNote += DeleteArrowAbsolute;
     }
 
     void SpawnArrowAbsolute(ArrowType arrow)
@@ -21,10 +25,24 @@ public class ArrowSpawner : MonoBehaviour
         if(arrow == delegateArrow)
         {
             GameObject spawnedArrow = Instantiate(arrowToSpawn, rectTransform);
+            spawnedArrows.Add(spawnedArrow); //Adds spawnedArrow to the array of spawnedArrows of this type, for easier early deletion
             spawnedArrow.transform.SetParent(rectTransform, false);
             RectTransform spawnedArrowLTransform = spawnedArrow.GetComponent<RectTransform>();
             spawnedArrowLTransform.localPosition = new Vector3(spawnLocation.x, spawnLocation.y, spawnLocation.z);
-            Destroy(spawnedArrow, 6);
+            /*if (spawnedArrow != null) //Alternatively implemented this deletion, by calling the DeleteArrowAbsolute invocation whenever a note is missed and score is reduced in "JSONRead.cs"
+            {
+                Destroy(spawnedArrow, 6);
+            }*/
+        }
+    }
+
+    void DeleteArrowAbsolute(ArrowType arrow)
+    {
+        if(arrow == delegateArrow && spawnedArrows.Count > 0) //Ensures that the proper arrow type is being considered, and that that arrow has arrows still spawned in
+        {
+            GameObject arrowToDelete = spawnedArrows[0]; //Records the current oldest arrow (so that if multiple arrows could be considered a hit, only the most accurate one is deleted)
+            spawnedArrows.RemoveAt(0); //Removes recorded arrow from List
+            Destroy(arrowToDelete); //Destroys most oldest child arrow
         }
     }
 }
