@@ -14,9 +14,11 @@ public class JSONRead : MonoBehaviour
 {
     //This Score and Slider implementation is temporary and simply used to check if the score and health bar are functioning properly
     public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI comboText; //Text for displaying int of notes hit in a row
     public Slider healthBar;
 
     private float playerScore; //This value stores the player score
+    private int noteCombo;
     private float playerHealth; //This value stores the player health, current implementation is starting with 10 health, losing 1 per mistake, but gaining 0.25 per successful hit
     private int noteIndex = 0; //This is part of the note spawning implementation
 
@@ -186,8 +188,9 @@ public class JSONRead : MonoBehaviour
             onPlayNote?.Invoke(ArrowType.K_RIGHT); //K note deletion called for miss
         }
 
-        healthBar.value = (playerHealth/50f); //Sets visible value on healthbar to be a percentage assuming total health is 10HP
+        healthBar.value = playerHealth/50f; //Sets visible value on healthbar to be a percentage assuming total health is 10HP
         scoreText.SetText("Score: " + playerScore); //Updates score value in text element each frame
+        comboText.SetText("Combo: " + noteCombo); //Updates combo value in text element each frame
 
         currentNoteTime += Time.deltaTime; //Increments time
     }
@@ -319,6 +322,7 @@ public class JSONRead : MonoBehaviour
         }
         else //Early note press
         {
+            AdjustScore(0f); //Sends signal that a note was missed, potentially breaking a combo
             AdjustHealth(-1f); //Removes one health for hitting a note early
             Debug.Log("Early Input");
         }
@@ -329,7 +333,15 @@ public class JSONRead : MonoBehaviour
     //This function will also update the score demonstration in the UI
     void AdjustScore(float changeValue)
     {
-        playerScore += changeValue;
+        if (changeValue > 0)
+        {
+            noteCombo++; //Determines how many notes have been hit in a row
+            playerScore += changeValue * (noteCombo / 2 + 1); //Multiplies score gain in a format of x1, x2, x3 etc for every 4 notes, currently with no limit
+        }
+        else //When changeValue == 0
+        {
+            noteCombo = 0; //Resets combo
+        }
     }
 
     //Adjusts the health by the given changeValue
