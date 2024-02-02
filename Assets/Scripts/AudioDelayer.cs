@@ -10,13 +10,14 @@ public class AudioDelayer : MonoBehaviour
     private JSONRead inputJson;
     private float yieldSeconds;
     bool paused;
+    public float offset;
 
     private void Start()
     {
         PauseMenu.onPauseMenuEscape += ResumeSong;
         paused = false;
         inputJson = FindObjectOfType<JSONRead>();
-        yieldSeconds = inputJson.noteSpeedFactor - inputJson.goodTimeLeeway;
+        yieldSeconds = inputJson.noteSpeedFactor - inputJson.successTimeLeeway + offset;
         m_Source = this.GetComponent<AudioSource>();
         m_Source?.Pause();
         StartCoroutine(DelaySong());

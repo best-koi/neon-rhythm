@@ -35,7 +35,7 @@ public class JSONRead : MonoBehaviour
 
     public static Action<ArrowType> onSpawnNote; //Action used to tell other scripts that a note should be spawned.
 
-    public static Action<ArrowType> onPlayNote; //Action used to tell other scripts that a note has been played
+    public static Action<ArrowType, Accuracy> onPlayNote; //Action used to tell other scripts that a note has been played
 
     public float noteSpeedFactor; // These values are used to determine how long it will take for notes to reach the bottom of the screen from when they spawn in; calculated in Start()
     //These three leeway values could be calculated in Start() based upon songInfo bpm
@@ -167,25 +167,25 @@ public class JSONRead : MonoBehaviour
             dTimes.RemoveAt(0);
             Debug.Log($"D dead {currentNoteTime}");
             AdjustHealth(-1f); //Removes one health because a note was missed
-            onPlayNote?.Invoke(ArrowType.D_LEFT); //D note deletion called for miss
+            onPlayNote?.Invoke(ArrowType.D_LEFT, Accuracy.MISS); //D note deletion called for miss
         }
         if (fTimes.Count > 0 && fTimes[0] < currentNoteTime)
         {
             fTimes.RemoveAt(0);
             AdjustHealth(-1f); //Removes one health because a note was missed
-            onPlayNote?.Invoke(ArrowType.F_DOWN); //F note deletion called for miss
+            onPlayNote?.Invoke(ArrowType.F_DOWN, Accuracy.MISS); //F note deletion called for miss
         }
         if (jTimes.Count > 0 && jTimes[0] < currentNoteTime)
         {
             jTimes.RemoveAt(0);
             AdjustHealth(-1f); //Removes one health because a note was missed
-            onPlayNote?.Invoke(ArrowType.J_UP); //J note deletion called for miss
+            onPlayNote?.Invoke(ArrowType.J_UP, Accuracy.MISS); //J note deletion called for miss
         }
         if (kTimes.Count > 0 && kTimes[0] < currentNoteTime)
         {
             kTimes.RemoveAt(0);
             AdjustHealth(-1f); //Removes one health because a note was missed
-            onPlayNote?.Invoke(ArrowType.K_RIGHT); //K note deletion called for miss
+            onPlayNote?.Invoke(ArrowType.K_RIGHT, Accuracy.MISS); //K note deletion called for miss
         }
 
         healthBar.value = playerHealth/50f; //Sets visible value on healthbar to be a percentage assuming total health is 10HP
@@ -227,12 +227,14 @@ public class JSONRead : MonoBehaviour
     {
         if (dTimes.Count > 0) //Makes sure that the respective note has atleast one element of itself on the screen
         {
+            Accuracy passedAcc; 
             float accuracy = Math.Abs(dTimes[0] - currentNoteTime); //This value records how much time the user was away from hitting the note perfectly on time
             Debug.Log("D Recep");
-            if (RateNote(accuracy)) //The note is rated and score/health values are properly adjusted, but if the note was found to be hit then it is removed from the time List
+            if (RateNote(accuracy) > 0) //The note is rated and score/health values are properly adjusted, but if the note was found to be hit then it is removed from the time List
             {
+                passedAcc = RateNote(accuracy);
                 dTimes.RemoveAt(0);
-                onPlayNote?.Invoke(ArrowType.D_LEFT); //D note has been played
+                onPlayNote?.Invoke(ArrowType.D_LEFT, passedAcc); //D note has been played
             }
         }
         else //Considers wrong note input otherwise
@@ -246,12 +248,14 @@ public class JSONRead : MonoBehaviour
     {
         if (fTimes.Count > 0) //Makes sure that the respective note has atleast one element of itself on the screen
         {
+            Accuracy passedAcc;
             float accuracy = Math.Abs(fTimes[0] - currentNoteTime); //This value records how much time the user was away from hitting the note perfectly on time
             Debug.Log("D Recep");
-            if (RateNote(accuracy)) //The note is rated and score/health values are properly adjusted, but if the note was found to be hit then it is removed from the time List
+            if (RateNote(accuracy) > 0) //The note is rated and score/health values are properly adjusted, but if the note was found to be hit then it is removed from the time List
             {
+                passedAcc = RateNote(accuracy);
                 fTimes.RemoveAt(0);
-                onPlayNote?.Invoke(ArrowType.F_DOWN); //F note has been played
+                onPlayNote?.Invoke(ArrowType.F_DOWN, passedAcc); //F note has been played
             }
         }
         else //Considers wrong note input otherwise
@@ -265,12 +269,14 @@ public class JSONRead : MonoBehaviour
     {
         if (jTimes.Count > 0) //Makes sure that the respective note has atleast one element of itself on the screen
         {
+            Accuracy passedAcc;
             float accuracy = Math.Abs(jTimes[0] - currentNoteTime); //This value records how much time the user was away from hitting the note perfectly on time
             Debug.Log("D Recep");
-            if (RateNote(accuracy)) //The note is rated and score/health values are properly adjusted, but if the note was found to be hit then it is removed from the time List
+            if (RateNote(accuracy) > 0) //The note is rated and score/health values are properly adjusted, but if the note was found to be hit then it is removed from the time List
             {
+                passedAcc = RateNote(accuracy);
                 jTimes.RemoveAt(0);
-                onPlayNote?.Invoke(ArrowType.J_UP); //J note has been played
+                onPlayNote?.Invoke(ArrowType.J_UP, passedAcc); //J note has been played
             }
         }
         else //Considers wrong note input otherwise
@@ -284,12 +290,14 @@ public class JSONRead : MonoBehaviour
     {
         if (kTimes.Count > 0) //Makes sure that the respective note has atleast one element of itself on the screen
         {
+            Accuracy passedAcc;
             float accuracy = Math.Abs(kTimes[0] - currentNoteTime); //This value records how much time the user was away from hitting the note perfectly on time
             Debug.Log("D Recep");
-            if (RateNote(accuracy)) //The note is rated and score/health values are properly adjusted, but if the note was found to be hit then it is removed from the time List
+            if (RateNote(accuracy) > 0) //The note is rated and score/health values are properly adjusted, but if the note was found to be hit then it is removed from the time List
             {
+                passedAcc = RateNote(accuracy);
                 kTimes.RemoveAt(0);
-                onPlayNote?.Invoke(ArrowType.K_RIGHT); //K note has been played
+                onPlayNote?.Invoke(ArrowType.K_RIGHT, passedAcc); //K note has been played
             }
         }
         else //Considers wrong note input otherwise
@@ -300,25 +308,25 @@ public class JSONRead : MonoBehaviour
 
     //This function is called within each of the InputReception functions in order to rate a note input based upon accuracy
     //It returns a bool if the note was "hit" at all, which will then signal for that note to be removed from the list in the respection input reception function
-    bool RateNote(float accuracy)
+    Accuracy RateNote(float accuracy)
     {
         if (accuracy < successTimeLeeway) //Perfect note placement
         {
             AdjustScore(200f); //Gives 200 score for a perfect note
             AdjustHealth(2f); //Gives the player 0.25 HP for a successful note placement
-            return true; //Note was hit
+            return Accuracy.PERFECT; //Note was hit
         }
         else if (accuracy < greatTimeLeeway) //Great note placement
         {
             AdjustScore(100f); //Gives 100 score for a great note
             AdjustHealth(2f); //Gives the player 0.25 HP for a successful note placement
-            return true; //Note was hit
+            return Accuracy.GREAT; //Note was hit
         }
         else if (accuracy < goodTimeLeeway) //Good note placement
         {
             AdjustScore(50f); //Gives 50 score for a good note
             AdjustHealth(2f); //Gives the player 0.25 HP for a successful note placement
-            return true; //Note was hit
+            return Accuracy.GOOD; //Note was hit
         }
         else //Early note press
         {
@@ -326,7 +334,7 @@ public class JSONRead : MonoBehaviour
             AdjustHealth(-1f); //Removes one health for hitting a note early
             Debug.Log("Early Input");
         }
-        return false;
+        return Accuracy.MISS;
     }
 
     //Adjusts the score by the given changeValue
