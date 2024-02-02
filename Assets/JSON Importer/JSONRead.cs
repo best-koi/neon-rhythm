@@ -166,24 +166,28 @@ public class JSONRead : MonoBehaviour
         {
             dTimes.RemoveAt(0);
             Debug.Log($"D dead {currentNoteTime}");
+            AdjustScore(0f); //Sends signal that a note was missed, potentially breaking a combo
             AdjustHealth(-1f); //Removes one health because a note was missed
             onPlayNote?.Invoke(ArrowType.D_LEFT, Accuracy.MISS); //D note deletion called for miss
         }
         if (fTimes.Count > 0 && fTimes[0] < currentNoteTime)
         {
             fTimes.RemoveAt(0);
+            AdjustScore(0f); //Sends signal that a note was missed, potentially breaking a combo
             AdjustHealth(-1f); //Removes one health because a note was missed
             onPlayNote?.Invoke(ArrowType.F_DOWN, Accuracy.MISS); //F note deletion called for miss
         }
         if (jTimes.Count > 0 && jTimes[0] < currentNoteTime)
         {
             jTimes.RemoveAt(0);
+            AdjustScore(0f); //Sends signal that a note was missed, potentially breaking a combo
             AdjustHealth(-1f); //Removes one health because a note was missed
             onPlayNote?.Invoke(ArrowType.J_UP, Accuracy.MISS); //J note deletion called for miss
         }
         if (kTimes.Count > 0 && kTimes[0] < currentNoteTime)
         {
             kTimes.RemoveAt(0);
+            AdjustScore(0f); //Sends signal that a note was missed, potentially breaking a combo
             AdjustHealth(-1f); //Removes one health because a note was missed
             onPlayNote?.Invoke(ArrowType.K_RIGHT, Accuracy.MISS); //K note deletion called for miss
         }
@@ -230,15 +234,16 @@ public class JSONRead : MonoBehaviour
             Accuracy passedAcc; 
             float accuracy = Math.Abs(dTimes[0] - currentNoteTime); //This value records how much time the user was away from hitting the note perfectly on time
             Debug.Log("D Recep");
-            if (RateNote(accuracy) > 0) //The note is rated and score/health values are properly adjusted, but if the note was found to be hit then it is removed from the time List
+            passedAcc = RateNote(accuracy);
+            if (passedAcc > 0) //The note is rated and score/health values are properly adjusted, but if the note was found to be hit then it is removed from the time List
             {
-                passedAcc = RateNote(accuracy);
                 dTimes.RemoveAt(0);
                 onPlayNote?.Invoke(ArrowType.D_LEFT, passedAcc); //D note has been played
             }
         }
         else //Considers wrong note input otherwise
         {
+            AdjustScore(0f); //Sends signal that a note was missed, potentially breaking a combo
             AdjustHealth(-1f); //Removes one health for incorrect input
         }
     }
@@ -251,15 +256,16 @@ public class JSONRead : MonoBehaviour
             Accuracy passedAcc;
             float accuracy = Math.Abs(fTimes[0] - currentNoteTime); //This value records how much time the user was away from hitting the note perfectly on time
             Debug.Log("D Recep");
-            if (RateNote(accuracy) > 0) //The note is rated and score/health values are properly adjusted, but if the note was found to be hit then it is removed from the time List
+            passedAcc = RateNote(accuracy);
+            if (passedAcc > 0) //The note is rated and score/health values are properly adjusted, but if the note was found to be hit then it is removed from the time List
             {
-                passedAcc = RateNote(accuracy);
                 fTimes.RemoveAt(0);
                 onPlayNote?.Invoke(ArrowType.F_DOWN, passedAcc); //F note has been played
             }
         }
         else //Considers wrong note input otherwise
         {
+            AdjustScore(0f); //Sends signal that a note was missed, potentially breaking a combo
             AdjustHealth(-1f); //Removes one health for incorrect input
         }
     }
@@ -272,15 +278,16 @@ public class JSONRead : MonoBehaviour
             Accuracy passedAcc;
             float accuracy = Math.Abs(jTimes[0] - currentNoteTime); //This value records how much time the user was away from hitting the note perfectly on time
             Debug.Log("D Recep");
-            if (RateNote(accuracy) > 0) //The note is rated and score/health values are properly adjusted, but if the note was found to be hit then it is removed from the time List
+            passedAcc = RateNote(accuracy);
+            if (passedAcc > 0) //The note is rated and score/health values are properly adjusted, but if the note was found to be hit then it is removed from the time List
             {
-                passedAcc = RateNote(accuracy);
                 jTimes.RemoveAt(0);
                 onPlayNote?.Invoke(ArrowType.J_UP, passedAcc); //J note has been played
             }
         }
         else //Considers wrong note input otherwise
         {
+            AdjustScore(0f); //Sends signal that a note was missed, potentially breaking a combo
             AdjustHealth(-1f); //Removes one health for incorrect input
         }
     }
@@ -293,15 +300,16 @@ public class JSONRead : MonoBehaviour
             Accuracy passedAcc;
             float accuracy = Math.Abs(kTimes[0] - currentNoteTime); //This value records how much time the user was away from hitting the note perfectly on time
             Debug.Log("D Recep");
-            if (RateNote(accuracy) > 0) //The note is rated and score/health values are properly adjusted, but if the note was found to be hit then it is removed from the time List
+            passedAcc = RateNote(accuracy);
+            if (passedAcc > 0) //The note is rated and score/health values are properly adjusted, but if the note was found to be hit then it is removed from the time List
             {
-                passedAcc = RateNote(accuracy);
                 kTimes.RemoveAt(0);
                 onPlayNote?.Invoke(ArrowType.K_RIGHT, passedAcc); //K note has been played
             }
         }
         else //Considers wrong note input otherwise
         {
+            AdjustScore(0f); //Sends signal that a note was missed, potentially breaking a combo
             AdjustHealth(-1f); //Removes one health for incorrect input
         }
     }
