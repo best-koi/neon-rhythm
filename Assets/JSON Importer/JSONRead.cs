@@ -101,6 +101,12 @@ public class JSONRead : MonoBehaviour
         public Track[] tracks;
     }
 
+    public class NoteTime //data structure element to record a note's spawn time and duration
+    {
+        public float time;
+        public float length;
+    }
+
     public SongInfo songInfo = new SongInfo(); //Defines a track to be filled
     public Note currentNote; //Part of note spawning implementation
     // Start is called before the first frame update
@@ -119,6 +125,10 @@ public class JSONRead : MonoBehaviour
         InputController.onFInput += FInputReception;
         InputController.onJInput += JInputReception;
         InputController.onKInput += KInputReception;
+        InputController.onDRelease += DReleaseReception;
+        InputController.onFRelease += FReleaseReception;
+        InputController.onJRelease += JReleaseReception;
+        InputController.onKRelease += KReleaseReception;
 
         //Establishes Lists for note time storage
         dTimes = new List<float>();
@@ -312,6 +322,27 @@ public class JSONRead : MonoBehaviour
             AdjustScore(0f); //Sends signal that a note was missed, potentially breaking a combo
             AdjustHealth(-1f); //Removes one health for incorrect input
         }
+    }
+
+    //Functions for release reception in order to calculate hold times for hold notes:
+    void DReleaseReception()
+    {
+
+    }
+
+    void FReleaseReception()
+    {
+
+    }
+
+    void JReleaseReception()
+    {
+
+    }
+
+    void KReleaseReception()
+    {
+
     }
 
     //This function is called within each of the InputReception functions in order to rate a note input based upon accuracy
