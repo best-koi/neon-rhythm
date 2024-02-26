@@ -246,7 +246,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: -6155886763620813703, guid: 19c29ce79d87bac4fbbf94b65ddb64d4, type: 2}
-  m_audioClip: {fileID: 8300000, guid: 41580a33ff1483048931551070ed1fd3, type: 3}
+  m_audioClip: {fileID: 8300000, guid: df5bffc34c5309c4882ec67f4171e01e, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.451
   m_Pitch: 1
@@ -1307,15 +1307,11 @@ MonoBehaviour:
   scoreText: {fileID: 1291569583}
   comboText: {fileID: 1421869426}
   healthBar: {fileID: 658629590}
-  dTimes: []
-  fTimes: []
-  jTimes: []
-  kTimes: []
   noteSpeedFactor: 4
   successTimeLeeway: 0.1
   greatTimeLeeway: 0.17
   goodTimeLeeway: 0.22
-  textJSON: {fileID: 4900000, guid: 54be73081085ddd4d83af2e20dbc5c97, type: 3}
+  textJSON: {fileID: 4900000, guid: f480e1bfc457d1e438eebf6b08b232f3, type: 3}
   currentNote:
     name: 
     midi: 0
