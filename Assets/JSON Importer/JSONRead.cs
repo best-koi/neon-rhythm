@@ -25,10 +25,10 @@ public class JSONRead : MonoBehaviour
     private float currentNoteTime = 0; //This is part of the note spawning implementation and records how much time has passed for the current note
 
     //Boolean values to record whether a note is being "held"
-    private bool DHold = false;
-    private bool FHold = false;
-    private bool JHold = false;
-    private bool KHold = false;
+    private float DHold = -1;
+    private float FHold = -1;
+    private float JHold = -1;
+    private float KHold = -1;
     //The following variables are used to store Lists for the current notes on screen in a specific category, 
     //only the time values will be stored for each of the parts of these Lists, and Lists are being used but only the value at index 0 is being considered so that
     //we won't have any issues regarding multiple notes of the same category being on screen at once and overwriting their expected time values; this will also prevent us from traversing the main track array multiple times
@@ -209,21 +209,26 @@ public class JSONRead : MonoBehaviour
 
         currentNoteTime += Time.deltaTime; //Increments time
 
+        DHold -= Time.deltaTime;
+        FHold -= Time.deltaTime;
+        JHold -= Time.deltaTime;
+        KHold -= Time.deltaTime;
+
         //Adds score for notes currently being held
         //These loops are all separated, since if multiple holds are active, the score application should compound
-        if (DHold)
+        if (DHold>0)
         {
             AdjustScore(50 * Time.deltaTime, false); //Adds 50 score per second - not comboing as this is a part of the holding function
         }
-        if (FHold)
+        if (FHold>0)
         {
             AdjustScore(50 * Time.deltaTime, false); //Adds 50 score per second - not comboing as this is a part of the holding function
         }
-        if (JHold)
+        if (JHold>0)
         {
             AdjustScore(50 * Time.deltaTime, false); //Adds 50 score per second - not comboing as this is a part of the holding function
         }
-        if (KHold)
+        if (KHold>0)
         {
             AdjustScore(50 * Time.deltaTime, false); //Adds 50 score per second - not comboing as this is a part of the holding function
         }
@@ -330,15 +335,17 @@ public class JSONRead : MonoBehaviour
             passedAcc = RateNote(accuracy);
             if (passedAcc != Accuracy.MISS) //The note is rated and score/health values are properly adjusted, but if the note was found to be hit then it is removed from the time List
             {
+                onPlayNote?.Invoke(ArrowType.D_LEFT, passedAcc); //D note has been played
                 if (dTimes[0].length == 0) //Not a hold note
                 {
-                    dTimes.RemoveAt(0);
-                    onPlayNote?.Invoke(ArrowType.D_LEFT, passedAcc); //D note has been played
+                    //dTimes.RemoveAt(0);
+                    //onPlayNote?.Invoke(ArrowType.D_LEFT, passedAcc); //D note has been played
                 }
                 else
                 {
-                    DHold = true; //Activates holding mechanic for the given note
+                    DHold = dTimes[0].length; //Activates holding mechanic for the given note
                 }
+                dTimes.RemoveAt(0);
             }
         }
         else //Considers wrong note input otherwise
@@ -359,15 +366,17 @@ public class JSONRead : MonoBehaviour
             passedAcc = RateNote(accuracy);
             if (passedAcc != Accuracy.MISS) //The note is rated and score/health values are properly adjusted, but if the note was found to be hit then it is removed from the time List
             {
+                onPlayNote?.Invoke(ArrowType.F_DOWN, passedAcc); //D note has been played
                 if (fTimes[0].length == 0) //Not a hold note
                 {
-                    fTimes.RemoveAt(0);
-                    onPlayNote?.Invoke(ArrowType.F_DOWN, passedAcc); //D note has been played
+                    //fTimes.RemoveAt(0);
+                    //onPlayNote?.Invoke(ArrowType.F_DOWN, passedAcc); //D note has been played
                 }
                 else
                 {
-                    FHold = true; //Activates holding mechanic for the given note
+                    FHold = fTimes[0].length; //Activates holding mechanic for the given note
                 }
+                fTimes.RemoveAt(0);
             }
         }
         else //Considers wrong note input otherwise
@@ -388,15 +397,17 @@ public class JSONRead : MonoBehaviour
             passedAcc = RateNote(accuracy);
             if (passedAcc != Accuracy.MISS) //The note is rated and score/health values are properly adjusted, but if the note was found to be hit then it is removed from the time List
             {
+                onPlayNote?.Invoke(ArrowType.J_UP, passedAcc); //D note has been played
                 if (jTimes[0].length == 0) //Not a hold note
                 {
-                    jTimes.RemoveAt(0);
-                    onPlayNote?.Invoke(ArrowType.J_UP, passedAcc); //D note has been played
+                    //jTimes.RemoveAt(0);
+                    //onPlayNote?.Invoke(ArrowType.J_UP, passedAcc); //D note has been played
                 }
                 else
                 {
-                    JHold = true; //Activates holding mechanic for the given note
+                    JHold = jTimes[0].length; //Activates holding mechanic for the given note
                 }
+                jTimes.RemoveAt(0);
             }
         }
         else //Considers wrong note input otherwise
@@ -417,15 +428,17 @@ public class JSONRead : MonoBehaviour
             passedAcc = RateNote(accuracy);
             if (passedAcc != Accuracy.MISS) //The note is rated and score/health values are properly adjusted, but if the note was found to be hit then it is removed from the time List
             {
+                onPlayNote?.Invoke(ArrowType.K_RIGHT, passedAcc); //D note has been played
                 if (kTimes[0].length == 0) //Not a hold note
                 {
-                    kTimes.RemoveAt(0);
-                    onPlayNote?.Invoke(ArrowType.K_RIGHT, passedAcc); //D note has been played
+                    //kTimes.RemoveAt(0);
+                    //onPlayNote?.Invoke(ArrowType.K_RIGHT, passedAcc); //D note has been played
                 }
                 else
                 {
-                    KHold = true; //Activates holding mechanic for the given note
+                    KHold = kTimes[0].length; //Activates holding mechanic for the given note
                 }
+                kTimes.RemoveAt(0);
             }
         }
         else //Considers wrong note input otherwise
@@ -439,41 +452,42 @@ public class JSONRead : MonoBehaviour
     //These functions all clear hold if it is currently active, and also perform a delete if it was active
     void DReleaseReception()
     {
-        if (DHold)
+        if (DHold>0)
         {
-            dTimes.RemoveAt(0);
-            onPlayNote?.Invoke(ArrowType.D_LEFT, Accuracy.PERFECT); //D note hold has ended - possibly add a rate function here to compare to the maximum possible hold time
-            DHold = false;
+            //dTimes.RemoveAt(0);
+            //onPlayNote?.Invoke(ArrowType.D_LEFT, Accuracy.PERFECT); //D note hold has ended - possibly add a rate function here to compare to the maximum possible hold time
+            DHold = -1;
         }
+        Debug.Log("D Released");
     }
 
     void FReleaseReception()
     {
-        if (FHold)
+        if (FHold>0)
         {
-            fTimes.RemoveAt(0);
-            onPlayNote?.Invoke(ArrowType.F_DOWN, Accuracy.PERFECT); //F note hold has ended - possibly add a rate function here to compare to the maximum possible hold time
-            FHold = false;
+            //fTimes.RemoveAt(0);
+            //onPlayNote?.Invoke(ArrowType.F_DOWN, Accuracy.PERFECT); //F note hold has ended - possibly add a rate function here to compare to the maximum possible hold time
+            FHold = -1;
         }
     }
 
     void JReleaseReception()
     {
-        if (JHold)
+        if (JHold>-1)
         {
-            jTimes.RemoveAt(0);
-            onPlayNote?.Invoke(ArrowType.J_UP, Accuracy.PERFECT); //J note hold has ended - possibly add a rate function here to compare to the maximum possible hold time
-            JHold = false;
+            //jTimes.RemoveAt(0);
+            //onPlayNote?.Invoke(ArrowType.J_UP, Accuracy.PERFECT); //J note hold has ended - possibly add a rate function here to compare to the maximum possible hold time
+            JHold = 0;
         }
     }
 
     void KReleaseReception()
     {
-        if (KHold)
+        if (KHold>-1)
         {
-            kTimes.RemoveAt(0);
-            onPlayNote?.Invoke(ArrowType.K_RIGHT, Accuracy.PERFECT); //K note hold has ended - possibly add a rate function here to compare to the maximum possible hold time
-            KHold = false;
+            //kTimes.RemoveAt(0);
+            //onPlayNote?.Invoke(ArrowType.K_RIGHT, Accuracy.PERFECT); //K note hold has ended - possibly add a rate function here to compare to the maximum possible hold time
+            KHold = 0;
         }
     }
 
