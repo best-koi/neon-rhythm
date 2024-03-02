@@ -4,6 +4,10 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System; //Required for Math.Abs
+using UnityEditor;
+using UnityEngine.AddressableAssets;
+using UnityEngine.InputSystem;
+using UnityEngine.ResourceManagement.AsyncOperations;
 
 public enum ArrowType
 {
@@ -41,6 +45,8 @@ public class JSONRead : MonoBehaviour
     public float greatTimeLeeway = 0.17f; //GREAT
     public float goodTimeLeeway = 0.22f; //GOOD
     [SerializeField] public TextAsset textJSON;
+    //Used for Asyncronously finding the song chosen using Addressables
+    AsyncOperationHandle<TextAsset> beatmapHandler;
 
     [System.Serializable]
     public class Note //Adjust this depending on what values each "note" actually has in the JSON file
@@ -105,8 +111,14 @@ public class JSONRead : MonoBehaviour
     public Note[] songNotes; //creates reference array for songs
 
     private bool AddingNotes; //Check for whether the notes track has been finished
-    void Start()
+
+    public IEnumerator Start()
     {
+        if (SongSelectionMenu.selectedSong != null)
+        {
+            yield return StartCoroutine(InitializeSelectedSong());
+        }
+
         AddingNotes = true; //Instantiates track seeking as valid
         //Establishes health and score values
         playerScore = 0;
@@ -347,5 +359,20 @@ public class JSONRead : MonoBehaviour
     void EndLevel()
     {
         Debug.Log("The level should end here"); //Add implementation for level ending
+    }
+
+    public IEnumerator InitializeSelectedSong()
+    {
+        beatmapHandler = Addressables.LoadAssetAsync<TextAsset>(SongSelectionMenu.selectedSong + " Beatmap");
+        yield return beatmapHandler;
+        if (beatmapHandler.Status == AsyncOperationStatus.Succeeded)
+        {
+            textJSON = beatmapHandler.Result;
+        }
+    }
+
+    private void OnDestroy()
+    {
+        Addressables.Release(beatmapHandler);
     }
 }

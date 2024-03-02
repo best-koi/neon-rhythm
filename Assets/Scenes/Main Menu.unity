@@ -1360,6 +1360,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f97a3aa91a1164459945b33605c3a0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlayScene: SongSelect
 --- !u!1 &1977736723
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,13 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class MainMenuButtons : MonoBehaviour
 {
+    public string PlayScene;
     public void Play() {
-        SceneAdditives.LoadScene("Main", LoadSceneMode.Single); 
+        SceneAdditives.LoadScene(PlayScene, LoadSceneMode.Single); 
     }//end Play Button
 
 
