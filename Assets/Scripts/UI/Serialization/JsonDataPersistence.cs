@@ -59,6 +59,8 @@ public class JsonDataPersistence : IDataPersistence
         }
     }
 
+
+
     /// <summary>
     /// LoadData will take an existing Json at the path provided and convert it into data type T for use within the game.
     /// The path you provide will be the name of the file and its file type to load from within this GameData folder.
@@ -103,6 +105,20 @@ public class JsonDataPersistence : IDataPersistence
             }
 
             return backupdata;
+        }
+    }
+
+    public T LoadData<T>(TextAsset asset)
+    {
+        try
+        {
+            T data = JsonConvert.DeserializeObject<T>(asset.text);
+            return data == null ? throw new NullReferenceException($"There is no data in {asset}") : data;
+        } 
+        catch (Exception e)
+        {
+            Debug.LogError($"Unable to load data: {e.Message} {e.StackTrace}");
+            throw e;
         }
     }
 
