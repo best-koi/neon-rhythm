@@ -22,7 +22,7 @@ public class AudioDelayer : MonoBehaviour
         PauseMenu.onPauseMenuEscape += ResumeSong;
         paused = false;
         inputJson = FindObjectOfType<JSONRead>();
-        yieldSeconds = inputJson.noteSpeedFactor - inputJson.successTimeLeeway + offset;
+        yieldSeconds = inputJson.noteSpeedFactor - inputJson.goodTimeLeeway + offset;
         m_Source = this.GetComponent<AudioSource>();
         yield return StartCoroutine(InitializeSelectedSong());
     }

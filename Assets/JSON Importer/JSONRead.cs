@@ -254,7 +254,7 @@ public class JSONRead : MonoBehaviour
             Debug.Log($"D Shot {currentNoteTime}");
             NoteTime newTimeD = new NoteTime
             {
-                time = note.time + (noteSpeedFactor - successTimeLeeway),
+                time = note.time + (noteSpeedFactor),
                 length = 0 //Length is set to zero when it is not a hold note
             };
             dTimes.Add(newTimeD); //Considers time for this note being hit to be at the note spawning time, plus the animation time, subtracting the leeway for the note to continue past the goalpost
@@ -264,7 +264,7 @@ public class JSONRead : MonoBehaviour
             onSpawnNote?.Invoke(ArrowType.F_DOWN);
             NoteTime newTimeF = new NoteTime
             {
-                time = note.time + (noteSpeedFactor - successTimeLeeway),
+                time = note.time + (noteSpeedFactor),
                 length = 0 //Length is set to zero when it is not a hold note
             };
             fTimes.Add(newTimeF); //Considers time for this note being hit to be at the note spawning time, plus the animation time, subtracting the leeway for the note to continue past the goalpost
@@ -274,7 +274,7 @@ public class JSONRead : MonoBehaviour
             onSpawnNote?.Invoke(ArrowType.J_UP);
             NoteTime newTimeJ = new NoteTime
             {
-                time = note.time + (noteSpeedFactor - successTimeLeeway),
+                time = note.time + (noteSpeedFactor),
                 length = 0 //Length is set to zero when it is not a hold note
             };
             jTimes.Add(newTimeJ); //Considers time for this note being hit to be at the note spawning time, plus the animation time, subtracting the leeway for the note to continue past the goalpost
@@ -284,7 +284,7 @@ public class JSONRead : MonoBehaviour
             onSpawnNote?.Invoke(ArrowType.K_RIGHT);
             NoteTime newTimeK = new NoteTime
             {
-                time = note.time + (noteSpeedFactor - successTimeLeeway),
+                time = note.time + (noteSpeedFactor),
                 length = 0 //Length is set to zero when it is not a hold note
             };
             kTimes.Add(newTimeK); //Considers time for this note being hit to be at the note spawning time, plus the animation time, subtracting the leeway for the note to continue past the goalpost
@@ -298,7 +298,7 @@ public class JSONRead : MonoBehaviour
             Debug.Log($"D Shot {currentNoteTime}");
             NoteTime newTimeD = new NoteTime
             {
-                time = note.time + (noteSpeedFactor - successTimeLeeway),
+                time = note.time + (noteSpeedFactor),
                 length = note.duration
             };
             dTimes.Add(newTimeD); //Considers time for this note being hit to be at the note spawning time, plus the animation time, subtracting the leeway for the note to continue past the goalpost
@@ -308,7 +308,7 @@ public class JSONRead : MonoBehaviour
             onSpawnNote?.Invoke(ArrowType.F_DOWN);
             NoteTime newTimeF = new NoteTime
             {
-                time = note.time + (noteSpeedFactor - successTimeLeeway),
+                time = note.time + (noteSpeedFactor),
                 length = note.duration
             };
             fTimes.Add(newTimeF); //Considers time for this note being hit to be at the note spawning time, plus the animation time, subtracting the leeway for the note to continue past the goalpost
@@ -318,7 +318,7 @@ public class JSONRead : MonoBehaviour
             onSpawnNote?.Invoke(ArrowType.J_UP);
             NoteTime newTimeJ = new NoteTime
             {
-                time = note.time + (noteSpeedFactor - successTimeLeeway),
+                time = note.time + (noteSpeedFactor),
                 length = note.duration
             };
             jTimes.Add(newTimeJ); //Considers time for this note being hit to be at the note spawning time, plus the animation time, subtracting the leeway for the note to continue past the goalpost
@@ -328,7 +328,7 @@ public class JSONRead : MonoBehaviour
             onSpawnNote?.Invoke(ArrowType.K_RIGHT);
             NoteTime newTimeK = new NoteTime
             {
-                time = note.time + (noteSpeedFactor - successTimeLeeway),
+                time = note.time + (noteSpeedFactor),
                 length = note.duration
             };
             kTimes.Add(newTimeK); //Considers time for this note being hit to be at the note spawning time, plus the animation time, subtracting the leeway for the note to continue past the goalpost
