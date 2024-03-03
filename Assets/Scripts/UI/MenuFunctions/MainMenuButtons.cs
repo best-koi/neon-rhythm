@@ -19,6 +19,7 @@ public class MainMenuButtons : MonoBehaviour
 
     public void MeetTheStagehands()
     {
+        SceneAdditives.LoadScene("Credits Screen", LoadSceneMode.Single); //Loads credits
         //TODO: Make a Scene transition if needed, otherwise just swap out the UI later
     }
 
