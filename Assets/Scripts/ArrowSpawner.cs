@@ -48,13 +48,13 @@ public class ArrowSpawner : MonoBehaviour
         {
             GameObject arrowToDelete = spawnedArrows[0]; //Records the current oldest arrow (so that if multiple arrows could be considered a hit, only the most accurate one is deleted)
             spawnedArrows.RemoveAt(0); //Removes recorded arrow from List
-            /*switch(acc)
+            switch(acc)
             {
                 case Accuracy.PERFECT: accuracyText.text = "Perfect!"; break;
                 case Accuracy.GREAT: accuracyText.text = "Great!"; break;
                 case Accuracy.GOOD: accuracyText.text = "Good!"; break;
                 default: accuracyText.text = "Miss!"; break;
-            }*/ //Requires an instance of arrow spawner to be present in the main scene
+            } //Requires an instance of arrow spawner to be present in the main scene
             Destroy(arrowToDelete); //Destroys most oldest child arrow
         }
     }

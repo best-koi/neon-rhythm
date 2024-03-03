@@ -185,7 +185,7 @@ public class JSONRead : MonoBehaviour
 
         //This portion of code is used to clear the zero elements from the note time Lists when they have passed the zero time threshold
         //Times.Count > 0 is included to make sure that a value in index 0 exists before trying to run the conditional check
-        if (dTimes.Count > 0 && dTimes[0].time < currentNoteTime)
+        if (dTimes.Count > 0 && (dTimes[0].time + goodTimeLeeway) < currentNoteTime)
         {
             dTimes.RemoveAt(0);
             Debug.Log($"D dead {currentNoteTime}");
@@ -193,21 +193,21 @@ public class JSONRead : MonoBehaviour
             AdjustHealth(-1f); //Removes one health because a note was missed
             onPlayNote?.Invoke(ArrowType.D_LEFT, Accuracy.MISS); //D note deletion called for miss
         }
-        if (fTimes.Count > 0 && fTimes[0].time < currentNoteTime)
+        if (fTimes.Count > 0 && (fTimes[0].time + goodTimeLeeway) < currentNoteTime)
         {
             fTimes.RemoveAt(0);
             AdjustScore(0f, true); //Sends signal that a note was missed, potentially breaking a combo
             AdjustHealth(-1f); //Removes one health because a note was missed
             onPlayNote?.Invoke(ArrowType.F_DOWN, Accuracy.MISS); //F note deletion called for miss
         }
-        if (jTimes.Count > 0 && jTimes[0].time < currentNoteTime)
+        if (jTimes.Count > 0 && (jTimes[0].time + goodTimeLeeway) < currentNoteTime)
         {
             jTimes.RemoveAt(0);
             AdjustScore(0f, true); //Sends signal that a note was missed, potentially breaking a combo
             AdjustHealth(-1f); //Removes one health because a note was missed
             onPlayNote?.Invoke(ArrowType.J_UP, Accuracy.MISS); //J note deletion called for miss
         }
-        if (kTimes.Count > 0 && kTimes[0].time < currentNoteTime)
+        if (kTimes.Count > 0 && (kTimes[0].time + goodTimeLeeway) < currentNoteTime)
         {
             kTimes.RemoveAt(0);
             AdjustScore(0f, true); //Sends signal that a note was missed, potentially breaking a combo
