@@ -12,6 +12,10 @@ public class InputController : MonoBehaviour
     public static event Action onFInput;
     public static event Action onJInput;
     public static event Action onKInput;
+    public static event Action onDRelease;
+    public static event Action onFRelease;
+    public static event Action onJRelease;
+    public static event Action onKRelease;
     
     public InputAction dInput;
     public InputAction fInput;
@@ -27,19 +31,23 @@ public class InputController : MonoBehaviour
     {
         dInput = playerInputs.DFJK.D;
         dInput.Enable();
-        dInput.performed += D;
+        dInput.started += D;
+        dInput.canceled += DRelease;
 
         fInput = playerInputs.DFJK.F; 
         fInput.Enable();
-        fInput.performed += F;
+        fInput.started += F;
+        fInput.canceled += FRelease;
         
         jInput = playerInputs.DFJK.J;
         jInput.Enable();
-        jInput.performed += J;
+        jInput.started += J;
+        jInput.canceled += JRelease;
 
         kInput = playerInputs.DFJK.K;
         kInput.Enable();
-        kInput.performed += K;
+        kInput.started += K;
+        kInput.canceled += KRelease;
     }
 
     private void OnDisable() //Disables for compile reasons
@@ -69,5 +77,25 @@ public class InputController : MonoBehaviour
     private void K(InputAction.CallbackContext context) //Function for when K is pressed
     {
         onKInput?.Invoke();
+    }
+
+    private void DRelease(InputAction.CallbackContext context)
+    {
+        onDRelease?.Invoke();
+    }
+
+    private void FRelease(InputAction.CallbackContext context)
+    {
+        onFRelease?.Invoke();
+    }
+
+    private void JRelease(InputAction.CallbackContext context)
+    {
+        onJRelease?.Invoke();
+    }
+
+    private void KRelease(InputAction.CallbackContext context)
+    {
+        onKRelease?.Invoke();
     }
 }

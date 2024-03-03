@@ -1,7 +1,12 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 
+public enum Accuracy
+{
+    MISS, GOOD, GREAT, PERFECT
+}
 
 public class ArrowSpawner : MonoBehaviour
 {
@@ -10,6 +15,7 @@ public class ArrowSpawner : MonoBehaviour
     private RectTransform rectTransform;
     private Vector3 spawnLocation;
     private List<GameObject> spawnedArrows;
+    [SerializeField] private TMP_Text accuracyText;
 
     void Start()
     {
@@ -36,12 +42,19 @@ public class ArrowSpawner : MonoBehaviour
         }
     }
 
-    void DeleteArrowAbsolute(ArrowType arrow)
+    void DeleteArrowAbsolute(ArrowType arrow, Accuracy acc)
     {
         if(arrow == delegateArrow && spawnedArrows.Count > 0) //Ensures that the proper arrow type is being considered, and that that arrow has arrows still spawned in
         {
             GameObject arrowToDelete = spawnedArrows[0]; //Records the current oldest arrow (so that if multiple arrows could be considered a hit, only the most accurate one is deleted)
             spawnedArrows.RemoveAt(0); //Removes recorded arrow from List
+            switch(acc)
+            {
+                case Accuracy.PERFECT: accuracyText.text = "Perfect!"; break;
+                case Accuracy.GREAT: accuracyText.text = "Great!"; break;
+                case Accuracy.GOOD: accuracyText.text = "Good!"; break;
+                default: accuracyText.text = "Miss!"; break;
+            }
             Destroy(arrowToDelete); //Destroys most oldest child arrow
         }
     }
