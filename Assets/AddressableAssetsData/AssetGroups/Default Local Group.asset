@@ -35,6 +35,24 @@ MonoBehaviour:
     m_SerializedLabels:
     - audio
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cccdbb105cccf54418e58c4e72de90c8
+    m_Address: XenoGensis Metadata
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - metadata
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e7fab26eec27e944e84077abb3c61856
+    m_Address: XenoGenesis Song
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - audio
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 255d1fbfab6f6e2469506297b4efa90a
+    m_Address: XenoGenesis Beatmap
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - beatmap
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: ab0b0ef359ba13b44afef0b22d514cf2, type: 2}
   m_SchemaSet:
