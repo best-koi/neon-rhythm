@@ -53,6 +53,24 @@ MonoBehaviour:
     m_SerializedLabels:
     - beatmap
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c73850ee9bc1ac34fb5fee7431a4102b
+    m_Address: Neophobia
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - metadata
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bd2dae0d3d6602c489a80d9e22c6086b
+    m_Address: Neophobia Beatmap
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - beatmap
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: df5bffc34c5309c4882ec67f4171e01e
+    m_Address: Neophobia Song
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - audio
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: ab0b0ef359ba13b44afef0b22d514cf2, type: 2}
   m_SchemaSet:
