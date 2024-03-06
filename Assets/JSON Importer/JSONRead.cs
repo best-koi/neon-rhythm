@@ -157,7 +157,7 @@ public class JSONRead : MonoBehaviour
         songInfo = JsonUtility.FromJson<SongInfo>(textJSON.text); //Possibly make the name of the json file serializable
         songNotes = songInfo.tracks[0].notes;
 
-        noteSpeedFactor = 5; //Current assumption is that notes will take 5 seconds to travel, this could be replaced with a calculation using songInfo.tracks[0].length which is an int and songInfo.tracks[0].duration which is a float for time
+        //noteSpeedFactor = 5; //Current assumption is that notes will take 5 seconds to travel, this could be replaced with a calculation using songInfo.tracks[0].length which is an int and songInfo.tracks[0].duration which is a float for time
     }
 
     // Update is called based on a fixed time, this function is used to spawn in notes based upon inputs from json file
