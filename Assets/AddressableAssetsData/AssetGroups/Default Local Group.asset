@@ -72,19 +72,19 @@ MonoBehaviour:
     - audio
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: df72032de4b4d9f45a764e2ae257992e
-    m_Address: BuddyHollyBeatmap
+    m_Address: Buddy Holly Beatmap
     m_ReadOnly: 0
     m_SerializedLabels:
     - beatmap
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 1d2dccc0007ac574e9dacd63bf02efdd
-    m_Address: BuddyHolly Audio
+    m_Address: Buddy Holly Audio
     m_ReadOnly: 0
     m_SerializedLabels:
     - audio
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 783a6f7ad83578145ab58f4c7a3e4011
-    m_Address: BuddyHolly Metadata
+    m_Address: Buddy Holly Metadata
     m_ReadOnly: 0
     m_SerializedLabels:
     - metadata
