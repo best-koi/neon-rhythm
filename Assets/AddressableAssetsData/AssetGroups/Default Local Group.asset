@@ -89,6 +89,24 @@ MonoBehaviour:
     m_SerializedLabels:
     - metadata
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 376636dfc5fbb554386d1fc05abb559f
+    m_Address: NaNaNaNa Beatmap
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - beatmap
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 54bd5777cf91c5149b32ed763cfad562
+    m_Address: NaNaNaNa Song
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - audio
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 675b3d67fad94964583d0787709d7686
+    m_Address: NaNaNaNa Metadata
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - metadata
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: ab0b0ef359ba13b44afef0b22d514cf2, type: 2}
   m_SchemaSet:
