@@ -78,7 +78,7 @@ MonoBehaviour:
     - beatmap
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 1d2dccc0007ac574e9dacd63bf02efdd
-    m_Address: Buddy Holly Audio
+    m_Address: Buddy Holly Song
     m_ReadOnly: 0
     m_SerializedLabels:
     - audio
@@ -103,6 +103,42 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 675b3d67fad94964583d0787709d7686
     m_Address: NaNaNaNa Metadata
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - metadata
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b0f58ac6300ed214f9e082c419ef4be1
+    m_Address: ThnksFrThMmrs Song
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - audio
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5dcdbebc15d2cf5408ce098beae68f1d
+    m_Address: You'reGonnaGoFarKid Song
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - audio
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 64113ee51b30a164a8b239998f87c92a
+    m_Address: You'reGonnaGoFarKid Beatmap
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - beatmap
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 58940d4090c541a448e0b433a121f30c
+    m_Address: ThnksFrThMmrs Beatmap
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - beatmap
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c35839c88757af6489efb3b94f6650db
+    m_Address: You'reGonnaGoFarKid Metadata
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - metadata
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d7e6ab0a051195345bf928bb10a64cca
+    m_Address: ThnksFrThMmrs Metadata
     m_ReadOnly: 0
     m_SerializedLabels:
     - metadata
