@@ -12,7 +12,7 @@ public class AudioDelayer : MonoBehaviour
     private JSONRead inputJson;
     private float yieldSeconds;
     bool paused;
-    public float offset;
+    public static float offset;
 
     //Used for Asyncronously finding the song chosen using Addressables
     AsyncOperationHandle<AudioClip> audioHandler;
@@ -22,7 +22,7 @@ public class AudioDelayer : MonoBehaviour
         PauseMenu.onPauseMenuEscape += ResumeSong;
         paused = false;
         inputJson = FindObjectOfType<JSONRead>();
-        yieldSeconds = inputJson.noteSpeedFactor - inputJson.goodTimeLeeway + offset;
+        yieldSeconds = JSONRead.noteSpeedFactor - inputJson.goodTimeLeeway + offset;
         m_Source = this.GetComponent<AudioSource>();
         yield return StartCoroutine(InitializeSelectedSong());
     }
@@ -48,7 +48,7 @@ public class AudioDelayer : MonoBehaviour
 
     public IEnumerator InitializeSelectedSong()
     {
-        audioHandler = Addressables.LoadAssetAsync<AudioClip>(SongSelectionMenu.selectedSong + " Song");
+        audioHandler = Addressables.LoadAssetAsync<AudioClip>(SongSelectionMenu.selectedSong.SongName + " Song");
         yield return audioHandler;
         if (audioHandler.Status == AsyncOperationStatus.Succeeded)
         {

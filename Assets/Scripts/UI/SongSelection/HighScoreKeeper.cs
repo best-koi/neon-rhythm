@@ -8,16 +8,16 @@ using UnityEngine;
 [System.Serializable]
 public class HighScoreKeeper
 {
-    private List<Tuple<string, int>> _highScore = new();
+    private List<Tuple<string, float>> _highScore = new();
 
 
-    public List<Tuple<string, int>> HighScore
+    public List<Tuple<string, float>> HighScore
     {
         get { return _highScore; }
         set { _highScore = value; }
     }
 
-    public int GetHighScore (string str)
+    public float GetHighScore (string str)
     {
         foreach(var tuple in HighScore)
         {
@@ -29,7 +29,7 @@ public class HighScoreKeeper
         return 0;
     }
 
-    public void SetHighScore (string str, int i)
+    public void SetHighScore (string str, float i)
     {
         foreach (var tuple in HighScore)
         {
@@ -38,6 +38,7 @@ public class HighScoreKeeper
                 HighScore.Remove(tuple);
             }
         }
-        HighScore.Add(new Tuple<string, int>(str, i));
+        HighScore.Add(new Tuple<string, float>(str, i));
     }
+
 }

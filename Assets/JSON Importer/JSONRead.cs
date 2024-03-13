@@ -22,6 +22,7 @@ public class JSONRead : MonoBehaviour
     public Slider healthBar;
 
     private float playerScore; //This value stores the player score
+    public static float finalScore;
     private int noteCombo;
     private float playerHealth; //This value stores the player health, current implementation is starting with 10 health, losing 1 per mistake, but gaining 0.25 per successful hit
     private int noteIndex = 0; //This is part of the note spawning implementation
@@ -44,10 +45,10 @@ public class JSONRead : MonoBehaviour
     public List<NoteTime> kTimes;
 
     public static Action<ArrowType> onSpawnNote; //Action used to tell other scripts that a note should be spawned.
-
     public static Action<ArrowType, Accuracy> onPlayNote; //Action used to tell other scripts that a note has been played
+    public static Action onEndSong; //Action to tell other scripts the song is over
 
-    public float noteSpeedFactor; // These values are used to determine how long it will take for notes to reach the bottom of the screen from when they spawn in; calculated in Start()
+    public static float noteSpeedFactor; // These values are used to determine how long it will take for notes to reach the bottom of the screen from when they spawn in; calculated in Start()
     //These three leeway values could be calculated in Start() based upon songInfo bpm
     public float successTimeLeeway = 0.1f; //This is the value that determines how long the note will keep traveling after it is expected to be hit //PERFECT
     public float greatTimeLeeway = 0.17f; //GREAT
@@ -55,6 +56,9 @@ public class JSONRead : MonoBehaviour
     [SerializeField] public TextAsset textJSON;
     //Used for Asyncronously finding the song chosen using Addressables
     AsyncOperationHandle<TextAsset> beatmapHandler;
+
+    private IDataPersistence jsonData = new JsonDataPersistence();
+    public static int oldHighScore;
 
     [System.Serializable]
     public class Note //Adjust this depending on what values each "note" actually has in the JSON file
@@ -563,12 +567,19 @@ public class JSONRead : MonoBehaviour
     //This function is called when either the level has been completed or failed
     void EndLevel()
     {
-        Debug.Log("The level should end here"); //Add implementation for level ending
+        finalScore = playerScore;
+        if(playerScore > SongSelectionMenu.highScores.GetHighScore(SongSelectionMenu.selectedSong.SongName))
+        {
+            SongSelectionMenu.highScores.SetHighScore(SongSelectionMenu.selectedSong.SongName, (float) playerScore);
+            jsonData.SaveData<HighScoreKeeper>("/highscores.json", SongSelectionMenu.highScores);
+        }
+        SceneAdditives.LoadScene("Results", UnityEngine.SceneManagement.LoadSceneMode.Additive);
+        SceneAdditives.UnloadScene("Main");
     }
 
     public IEnumerator InitializeSelectedSong()
     {
-        beatmapHandler = Addressables.LoadAssetAsync<TextAsset>(SongSelectionMenu.selectedSong + " Beatmap");
+        beatmapHandler = Addressables.LoadAssetAsync<TextAsset>(SongSelectionMenu.selectedSong.SongName + " Beatmap");
         yield return beatmapHandler;
         if (beatmapHandler.Status == AsyncOperationStatus.Succeeded)
         {

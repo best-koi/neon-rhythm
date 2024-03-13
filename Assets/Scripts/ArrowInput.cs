@@ -16,7 +16,7 @@ public class ArrowInput : MonoBehaviour
     {
         rectTransform = this.GetComponent<RectTransform>();
         inputJson = FindObjectOfType<JSONRead>();
-        arrowSpeed = inputJson.noteSpeedFactor;// - inputJson.goodTimeLeeway;
+        arrowSpeed = JSONRead.noteSpeedFactor;// - inputJson.goodTimeLeeway;
         rectTransform.localPosition = new Vector3(0, rectTransform.localPosition.y,0);
     }
 

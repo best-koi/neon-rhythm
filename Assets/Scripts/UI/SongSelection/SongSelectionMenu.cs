@@ -7,22 +7,24 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
+using UnityEngine.AI;
 
 public class SongSelectionMenu : MonoBehaviour
 {
     private List<SongContainer> songs = new();
-    private HighScoreKeeper highScores = new();
+    [HideInInspector] public static HighScoreKeeper highScores = new();
     public Button prefab;
     public TMP_Text description;
     public TMP_Text difficulty;
     public TMP_Text highScore;
-    public static string selectedSong;
+    public static SongContainer selectedSong;
     private IDataPersistence jsonData = new JsonDataPersistence();
 
     AsyncOperationHandle<IList<TextAsset>> loadHandler;
 
     private void Start()
     {
+        GetHighScores();
         StartCoroutine(InitializeSelectableSongs());
         selectedSong = null;
     }
@@ -32,8 +34,10 @@ public class SongSelectionMenu : MonoBehaviour
         Debug.Log(song.SongDescription);
         description.text = song.SongDescription;
         difficulty.text = song.SongDifficulty;
-        highScore.text = 
-        selectedSong = song.SongName;
+        highScore.text = highScores.GetHighScore(song.SongName).ToString();
+        selectedSong = song;
+        JSONRead.noteSpeedFactor = song.SongSpeed;
+        AudioDelayer.offset = song.SongOffset;
     }
 
     public void PlaySong()
@@ -74,6 +78,18 @@ public class SongSelectionMenu : MonoBehaviour
                     newPrefab.onClick.AddListener(() => UpdateMetadata(song));
                 }
             };
+        }
+    }
+
+    public void GetHighScores()
+    {
+        try
+        {
+            highScores = jsonData.LoadData<HighScoreKeeper>("/highscores.json");
+        }
+        catch
+        {
+            highScores = new();
         }
     }
 

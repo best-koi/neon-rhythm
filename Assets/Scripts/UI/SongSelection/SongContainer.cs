@@ -6,6 +6,8 @@ public class SongContainer
     private string _songName;
     private string _songDescription;
     private string _songDifficulty;
+    private float _songSpeed;
+    private float _songOffset;
 
     public string SongName
     {
@@ -23,5 +25,17 @@ public class SongContainer
     {
         get { return _songDifficulty; }
         set { _songDifficulty = value; }
+    }
+
+    public float SongSpeed
+    {
+        get { return _songSpeed; }
+        set { _songSpeed = value; }
+    }
+
+    public float SongOffset
+    {
+        get { return _songOffset; }
+        set { _songOffset = value; }
     }
 }
