@@ -1,0 +1,151 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Default Local Group
+  m_EditorClassIdentifier: 
+  m_GroupName: Default Local Group
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 5481c9b13a3b6874c870586232499771
+  m_SerializeEntries:
+  - m_GUID: 54be73081085ddd4d83af2e20dbc5c97
+    m_Address: Bulls In The Bronx Beatmap
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - beatmap
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 26ffea3b492863349865d75649d06f17
+    m_Address: Bulls In The Bronx Metadata
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - metadata
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 41580a33ff1483048931551070ed1fd3
+    m_Address: Bulls In The Bronx Song
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - audio
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cccdbb105cccf54418e58c4e72de90c8
+    m_Address: XenoGensis Metadata
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - metadata
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e7fab26eec27e944e84077abb3c61856
+    m_Address: XenoGenesis Song
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - audio
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 255d1fbfab6f6e2469506297b4efa90a
+    m_Address: XenoGenesis Beatmap
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - beatmap
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c73850ee9bc1ac34fb5fee7431a4102b
+    m_Address: Neophobia
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - metadata
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bd2dae0d3d6602c489a80d9e22c6086b
+    m_Address: Neophobia Beatmap
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - beatmap
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: df5bffc34c5309c4882ec67f4171e01e
+    m_Address: Neophobia Song
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - audio
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: df72032de4b4d9f45a764e2ae257992e
+    m_Address: Buddy Holly Beatmap
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - beatmap
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1d2dccc0007ac574e9dacd63bf02efdd
+    m_Address: Buddy Holly Song
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - audio
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 783a6f7ad83578145ab58f4c7a3e4011
+    m_Address: Buddy Holly Metadata
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - metadata
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 376636dfc5fbb554386d1fc05abb559f
+    m_Address: NaNaNaNa Beatmap
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - beatmap
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 54bd5777cf91c5149b32ed763cfad562
+    m_Address: NaNaNaNa Song
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - audio
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 675b3d67fad94964583d0787709d7686
+    m_Address: NaNaNaNa Metadata
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - metadata
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b0f58ac6300ed214f9e082c419ef4be1
+    m_Address: ThnksFrThMmrs Song
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - audio
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5dcdbebc15d2cf5408ce098beae68f1d
+    m_Address: You'reGonnaGoFarKid Song
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - audio
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 64113ee51b30a164a8b239998f87c92a
+    m_Address: You'reGonnaGoFarKid Beatmap
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - beatmap
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 58940d4090c541a448e0b433a121f30c
+    m_Address: ThnksFrThMmrs Beatmap
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - beatmap
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c35839c88757af6489efb3b94f6650db
+    m_Address: You'reGonnaGoFarKid Metadata
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - metadata
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d7e6ab0a051195345bf928bb10a64cca
+    m_Address: ThnksFrThMmrs Metadata
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - metadata
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: ab0b0ef359ba13b44afef0b22d514cf2, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 16723e13906e1d140a6718978d120ba2, type: 2}
+    - {fileID: 11400000, guid: 9f81a710a04c2a74f858aec2d7b1cf95, type: 2}

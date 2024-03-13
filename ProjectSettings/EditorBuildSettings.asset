@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Main Menu.unity
     guid: 5b1c67886e6a2e14daf7633c66d92278
   - enabled: 1
+    path: Assets/Scenes/SongSelect.unity
+    guid: cc713b307959b414e9f3af3c694c00ed
+  - enabled: 1
     path: Assets/Scenes/OptionsMenu.unity
     guid: 7ef3affa0e1e23443a7780a4372faa95
   - enabled: 1
@@ -20,5 +23,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Main.unity
     guid: 23e0f9dc9d529f847955f8471c7d2c45
+  - enabled: 1
+    path: Assets/Scenes/Credits Screen.unity
+    guid: 97887bc10b8c4cd40ae3f9fb2082f502
   m_configObjects:
+    com.unity.addressableassets: {fileID: 11400000, guid: 1376c244330f7cd4e8c9c5080be343c6, type: 2}
     com.unity.input.settings: {fileID: 11400000, guid: 617d8fee35d63ed41bf0fdb8c1badf22, type: 2}

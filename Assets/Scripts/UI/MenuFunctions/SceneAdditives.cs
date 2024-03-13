@@ -1,24 +1,28 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
-//using UnityEditor.PackageManager;
+using System.Data;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
 public class SceneAdditives : MonoBehaviour
 {
+
     // Start is called before the first frame update
     void Start()
     {
         LoadScene("Main Menu", LoadSceneMode.Additive);
     }
-
-    public static void LoadScene(string scene, LoadSceneMode n)
+    public static void LoadScene(string str, LoadSceneMode n)
     {
-        SceneManager.LoadSceneAsync(scene, n);
+        SceneManager.LoadScene(str, n);
     }
 
-    public static void UnloadScene(string scene)
+    public static void UnloadScene(string str)
     {
-        SceneManager.UnloadSceneAsync(scene);
+        SceneManager.UnloadSceneAsync(str);
+        
     }
+    
 }

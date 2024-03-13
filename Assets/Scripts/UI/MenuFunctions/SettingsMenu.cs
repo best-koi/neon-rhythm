@@ -52,6 +52,12 @@ public class SettingsMenu : MonoBehaviour
         jsonData.DeleteData("/settings.json.tmp");
     }
 
+    public void DeleteHighScores()
+    {
+        jsonData.DeleteData("/highscores.json");
+        jsonData.DeleteData("/highscores.json.tmp");
+    }
+
     private void LoadSettingsData()
     {
         //If there is no settings to load (FileNotFound exception), go with the default!

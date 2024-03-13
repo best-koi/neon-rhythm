@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(AudioSource))]
@@ -10,16 +12,19 @@ public class AudioDelayer : MonoBehaviour
     private JSONRead inputJson;
     private float yieldSeconds;
     bool paused;
+    public static float offset;
 
-    private void Start()
+    //Used for Asyncronously finding the song chosen using Addressables
+    AsyncOperationHandle<AudioClip> audioHandler;
+
+    private IEnumerator Start()
     {
         PauseMenu.onPauseMenuEscape += ResumeSong;
         paused = false;
         inputJson = FindObjectOfType<JSONRead>();
-        yieldSeconds = inputJson.noteSpeedFactor - inputJson.goodTimeLeeway;
+        yieldSeconds = JSONRead.noteSpeedFactor - inputJson.goodTimeLeeway + offset;
         m_Source = this.GetComponent<AudioSource>();
-        m_Source?.Pause();
-        StartCoroutine(DelaySong());
+        yield return StartCoroutine(InitializeSelectedSong());
     }
 
     private void Update()
@@ -34,18 +39,26 @@ public class AudioDelayer : MonoBehaviour
         yieldSeconds -= Time.deltaTime;
     }
 
-    IEnumerator DelaySong()
-    {
-        paused = true;
-        yield return new WaitForSeconds(yieldSeconds);
-        m_Source?.Play();
-        paused = false;
-    }
-
     private void ResumeSong()
     {
         Time.timeScale = 1;
         m_Source?.Play();
         paused = false;
+    }
+
+    public IEnumerator InitializeSelectedSong()
+    {
+        audioHandler = Addressables.LoadAssetAsync<AudioClip>(SongSelectionMenu.selectedSong.SongName + " Song");
+        yield return audioHandler;
+        if (audioHandler.Status == AsyncOperationStatus.Succeeded)
+        {
+            m_Source.clip = audioHandler.Result;
+            m_Source.PlayDelayed(yieldSeconds);
+        }
+    }
+
+    private void OnDestroy()
+    {
+        Addressables.Release(audioHandler);
     }
 }

@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
@@ -15,13 +16,13 @@ public class PauseMenu : MonoBehaviour
 
     public void MainMenu()
     {
-        SceneAdditives.LoadScene("SceneManagement", UnityEngine.SceneManagement.LoadSceneMode.Single);
+        SceneAdditives.LoadScene("SceneManagement", LoadSceneMode.Single);   
         onPauseMenuEscape();
     }
 
     public void Resume()
     {
-        SceneAdditives.UnloadScene("PauseMenu");
+        SceneManager.UnloadSceneAsync("PauseMenu");
         onPauseMenuEscape();
     } 
 }
