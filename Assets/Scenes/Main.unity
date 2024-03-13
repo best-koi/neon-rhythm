@@ -246,7 +246,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: -6155886763620813703, guid: 19c29ce79d87bac4fbbf94b65ddb64d4, type: 2}
-  m_audioClip: {fileID: 8300000, guid: 41580a33ff1483048931551070ed1fd3, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 5838a4c8e4b8418488e0ab06e6cc1430, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.451
   m_Pitch: 1
@@ -344,7 +344,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 624c6b4a9294ea94a856701779162666, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  yieldSeconds: 0
 --- !u!4 &165175532
 Transform:
   m_ObjectHideFlags: 0
@@ -1312,7 +1311,7 @@ MonoBehaviour:
   successTimeLeeway: 0.1
   greatTimeLeeway: 0.17
   goodTimeLeeway: 0.22
-  textJSON: {fileID: 4900000, guid: 54be73081085ddd4d83af2e20dbc5c97, type: 3}
+  textJSON: {fileID: 4900000, guid: 34019874134ad15468b848cfccfe5dc2, type: 3}
   currentNote:
     name: 
     midi: 0
