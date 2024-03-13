@@ -182,6 +182,7 @@ public class JSONRead : MonoBehaviour
                 AddingNotes = false; //Tells the loop to fuck off
                 if (currentNoteTime > (songInfo.tracks[0].duration + (2 * noteSpeedFactor))) //Ends the level if there are no more notes to generate, after the time of the song has ended, plus double the animation travel time, so that the final notes have time to be played
                 {
+                    Debug.Log((songInfo.tracks[0].duration + (2 * noteSpeedFactor)));
                     EndLevel();
                 }
             }
@@ -514,19 +515,19 @@ public class JSONRead : MonoBehaviour
         if (accuracy < successTimeLeeway) //Perfect note placement
         {
             AdjustScore(200f, true); //Gives 200 score for a perfect note
-            AdjustHealth(2f); //Gives the player 0.25 HP for a successful note placement
+            AdjustHealth(0.2f); //Gives the player 0.25 HP for a successful note placement
             return Accuracy.PERFECT; //Note was hit
         }
         else if (accuracy < greatTimeLeeway) //Great note placement
         {
             AdjustScore(100f, true); //Gives 100 score for a great note
-            AdjustHealth(2f); //Gives the player 0.25 HP for a successful note placement
+            AdjustHealth(0.1f); //Gives the player 0.25 HP for a successful note placement
             return Accuracy.GREAT; //Note was hit
         }
         else if (accuracy < goodTimeLeeway) //Good note placement
         {
             AdjustScore(50f, true); //Gives 50 score for a good note
-            AdjustHealth(2f); //Gives the player 0.25 HP for a successful note placement
+            AdjustHealth(0f); //Gives the player 0.25 HP for a successful note placement
             return Accuracy.GOOD; //Note was hit
         }
         else //Early note press
@@ -560,6 +561,7 @@ public class JSONRead : MonoBehaviour
         playerHealth += changeValue;
         if (playerHealth < 0)
         {
+            Debug.Log("Murder");
             EndLevel();
         }
     }
