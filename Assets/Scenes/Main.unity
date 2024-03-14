@@ -344,7 +344,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 624c6b4a9294ea94a856701779162666, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  offset: 1
 --- !u!4 &165175532
 Transform:
   m_ObjectHideFlags: 0
@@ -560,14 +559,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.6804908, g: 0.55813456, b: 0.735849, a: 1}
+  m_Color: {r: 0.8962264, g: 0.8962264, b: 0.8962264, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: cd080c81c95f46d41aa75953833f147d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4ee1a6371adfcd54fae3e90edf4a5b36, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1307,7 +1306,6 @@ MonoBehaviour:
   scoreText: {fileID: 1291569583}
   comboText: {fileID: 1253442490}
   healthBar: {fileID: 658629590}
-  noteSpeedFactor: 2
   successTimeLeeway: 0.1
   greatTimeLeeway: 0.17
   goodTimeLeeway: 0.22
