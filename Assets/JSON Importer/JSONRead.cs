@@ -520,7 +520,7 @@ public class JSONRead : MonoBehaviour
         }
         else if (accuracy < greatTimeLeeway) //Great note placement
         {
-            AdjustScore(100f, true); //Gives 100 score for a great note
+            AdjustScore(100f, true); //Gives 100 score for a great 
             AdjustHealth(0.1f); //Gives the player 0.25 HP for a successful note placement
             return Accuracy.GREAT; //Note was hit
         }
@@ -559,11 +559,11 @@ public class JSONRead : MonoBehaviour
     void AdjustHealth(float changeValue)
     {
         playerHealth += changeValue;
-        if (playerHealth < 0)
+        /*if (playerHealth < 0)
         {
             Debug.Log("Murder");
             EndLevel();
-        }
+        }*/
     }
 
     //This function is called when either the level has been completed or failed
@@ -575,7 +575,7 @@ public class JSONRead : MonoBehaviour
             SongSelectionMenu.highScores.SetHighScore(SongSelectionMenu.selectedSong.SongName, (float) playerScore);
             jsonData.SaveData<HighScoreKeeper>("/highscores.json", SongSelectionMenu.highScores);
         }
-        SceneAdditives.LoadScene("Results", UnityEngine.SceneManagement.LoadSceneMode.Additive);
+        SceneAdditives.LoadScene("Results", UnityEngine.SceneManagement.LoadSceneMode.Single);
         SceneAdditives.UnloadScene("Main");
     }
 
