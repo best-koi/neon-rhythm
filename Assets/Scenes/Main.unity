@@ -158,8 +158,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 296, y: -72.911}
-  m_SizeDelta: {x: 793.78, y: 934.752}
+  m_AnchoredPosition: {x: 400, y: -40}
+  m_SizeDelta: {x: 900, y: 900}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &61429958
 MonoBehaviour:
@@ -181,7 +181,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: a9e6059c554308a47b0356b98150b438, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -211,13 +211,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a110f191259cdae4e9bea67d659859aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  none: {fileID: 0}
-  left: {fileID: 21300000, guid: 1db47e2e95d8acc42968cfb2b69a4189, type: 3}
-  down: {fileID: 21300000, guid: 20b54964eca617048835f2060753818d, type: 3}
-  up: {fileID: 21300000, guid: ac91327846a6533449bcb56282a49bdd, type: 3}
-  right: {fileID: 21300000, guid: 68ac08c8d12a6514d9c2dfaf56336b47, type: 3}
-  horizontal: {fileID: 0}
-  vertical: {fileID: 0}
+  characterSelect: 0
+  nones:
+  - {fileID: 21300000, guid: 373b2d2f3b635ae498916fe537012401, type: 3}
+  - {fileID: 21300000, guid: eb15ca89605dbc441accc91a89ebcd25, type: 3}
+  - {fileID: 21300000, guid: a82fcd188b37a194da7eedf7750ff2d8, type: 3}
+  lefts:
+  - {fileID: 21300000, guid: 36a4155b70d9d624b8ce290c2a105938, type: 3}
+  - {fileID: 21300000, guid: eb8e4db2d8dbf4c40896c1d5373b67c5, type: 3}
+  - {fileID: 21300000, guid: c6666f3e85c16e14498b0703e3a79e12, type: 3}
+  downs:
+  - {fileID: 21300000, guid: be9340bd4ec107d45a84de29ff192e15, type: 3}
+  - {fileID: 21300000, guid: d0e21df0a49224943a8f807ed137b0a4, type: 3}
+  - {fileID: 21300000, guid: 772d1742b661c964fb13c1fc4f92d68a, type: 3}
+  ups:
+  - {fileID: 21300000, guid: d1d7cb0cb1f46f145bbdc18ff8ec7fee, type: 3}
+  - {fileID: 21300000, guid: e4eed6676566c83498f7b663c2a9d5f1, type: 3}
+  - {fileID: 21300000, guid: 3fbe3f3bb490aff4a8a9069a214b2fb3, type: 3}
+  rights:
+  - {fileID: 21300000, guid: d1cf8c62593c423428231abc99a81644, type: 3}
+  - {fileID: 21300000, guid: 7005f4dfcc11d0c4bae483ea90b425e3, type: 3}
+  - {fileID: 21300000, guid: b63c6b3a0a318be4a947f898fe736225, type: 3}
+  horizontals:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  verticals:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!1 &165175529
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 //using UnityEditorInternal;
@@ -13,17 +14,20 @@ public class CharacterStateManager : MonoBehaviour
 {
 
     private AnimState characterState;
-    public Sprite none;
-    public Sprite left;
-    public Sprite down;
-    public Sprite up;
-    public Sprite right;
-    public Sprite horizontal;
-    public Sprite vertical;
+    public int characterSelect = 0;
+    public Sprite[] nones;
+    public Sprite[] lefts;
+    public Sprite[] downs;
+    public Sprite[] ups;
+    public Sprite[] rights;
+    public Sprite[] horizontals;
+    public Sprite[] verticals;
 
     // Start is called before the first frame update
     void Start()
     {
+        this.GetComponent<Image>().sprite = nones[characterSelect];
+
         InputController.onDInput += DState;
         InputController.onFInput += FState;
         InputController.onJInput += JState;
@@ -41,25 +45,25 @@ public class CharacterStateManager : MonoBehaviour
         switch (animState)
         {
             case AnimState.LEFT:
-                this.GetComponent<Image>().sprite = left;
+                this.GetComponent<Image>().sprite = lefts[characterSelect];
                 break;
             case AnimState.DOWN:
-                this.GetComponent<Image>().sprite = down;
+                this.GetComponent<Image>().sprite = downs[characterSelect];
                 break;
             case AnimState.UP:
-                this.GetComponent<Image>().sprite = up;
+                this.GetComponent<Image>().sprite = ups[characterSelect];
                 break;
             case AnimState.RIGHT:
-                this.GetComponent<Image>().sprite = right;
+                this.GetComponent<Image>().sprite = rights[characterSelect];
                 break;
             case AnimState.HORIZONTAL:
-                this.GetComponent<Image>().sprite = horizontal;
+                this.GetComponent<Image>().sprite = horizontals[characterSelect];
                 break;
             case AnimState.VERTICAL:
-                this.GetComponent<Image>().sprite = vertical;
+                this.GetComponent<Image>().sprite = verticals[characterSelect];
                 break;
             default:
-                this.GetComponent<Image>().sprite = none;
+                this.GetComponent<Image>().sprite = nones[characterSelect];
                 break;
         }
     }
