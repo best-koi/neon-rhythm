@@ -26,6 +26,7 @@ public class CharacterStateManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        characterSelect = SlideshowController.charVal;
         this.GetComponent<Image>().sprite = nones[characterSelect];
 
         InputController.onDInput += DState;

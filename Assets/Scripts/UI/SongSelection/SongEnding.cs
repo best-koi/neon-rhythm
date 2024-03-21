@@ -17,4 +17,9 @@ public class SongEnding : MonoBehaviour
     {
         SceneAdditives.LoadScene("SceneManagement", UnityEngine.SceneManagement.LoadSceneMode.Single);
     }
+
+    public void ExitGame()
+    {
+        Application.Quit();
+    }
 }

@@ -42,7 +42,7 @@ public class AudioDelayer : MonoBehaviour
     private void ResumeSong()
     {
         Time.timeScale = 1;
-        m_Source?.Play();
+        m_Source.Play();
         paused = false;
     }
 
@@ -60,5 +60,6 @@ public class AudioDelayer : MonoBehaviour
     private void OnDestroy()
     {
         Addressables.Release(audioHandler);
+        Destroy(this);
     }
 }

@@ -43,12 +43,13 @@ public class SongSelectionMenu : MonoBehaviour
     public void PlaySong()
     {
         if(selectedSong != null)
-            SceneManager.LoadSceneAsync("Main");
+            SceneAdditives.LoadSceneWhileDestroyingTheMusic("Main", LoadSceneMode.Single);
     }
 
     public void ReturnToMain()
     {
-        SceneManager.LoadSceneAsync("Main Menu");
+        SceneAdditives.LoadScene("Main Menu", LoadSceneMode.Single);
+        SceneAdditives.UnloadScene("SongSelect");
     }
 
     public SongContainer LoadSongMetadata(TextAsset textAsset)

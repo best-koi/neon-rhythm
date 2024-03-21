@@ -5,7 +5,7 @@ public class SlideshowController : MonoBehaviour
 {
     public Sprite[] slides;
     public Image slideImage;
-    public Toggle[] toggles;
+    public static int charVal;
 
     private void Start()
     {
@@ -18,7 +18,7 @@ public class SlideshowController : MonoBehaviour
         if (index >= 0 && index < slides.Length)
         {
             slideImage.sprite = slides[index];
-            toggles[index].isOn = true;
+            charVal = index;
         }
     }
 }

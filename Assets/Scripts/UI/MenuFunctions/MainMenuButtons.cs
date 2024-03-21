@@ -1,6 +1,7 @@
 using Newtonsoft.Json.Linq;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
@@ -35,7 +36,7 @@ public class MainMenuButtons : MonoBehaviour
 
     public void MeetTheStagehands()
     {
-        SceneAdditives.LoadScene("Credits Screen", LoadSceneMode.Additive);
+        SceneAdditives.LoadScene("Meet The Stagehands", LoadSceneMode.Additive);
         SceneAdditives.UnloadScene("Main Menu");
     }
 

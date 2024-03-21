@@ -16,13 +16,13 @@ public class PauseMenu : MonoBehaviour
 
     public void MainMenu()
     {
-        SceneAdditives.LoadScene("SceneManagement", LoadSceneMode.Single);   
         onPauseMenuEscape();
+        SceneManager.LoadScene("SceneManagement", LoadSceneMode.Single);   
     }
 
     public void Resume()
     {
-        SceneManager.UnloadSceneAsync("PauseMenu");
         onPauseMenuEscape();
+        SceneManager.UnloadSceneAsync("PauseMenu");
     } 
 }

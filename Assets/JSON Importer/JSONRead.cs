@@ -4,9 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System; //Required for Math.Abs
-using UnityEditor;
 using UnityEngine.AddressableAssets;
-using UnityEngine.InputSystem;
 using UnityEngine.ResourceManagement.AsyncOperations;
 
 public enum ArrowType
@@ -130,6 +128,17 @@ public class JSONRead : MonoBehaviour
 
     private bool AddingNotes; //Check for whether the notes track has been finished
 
+    public void Awake()
+    {
+        playerHealth = 50;
+        textJSON = null;
+        //Establishes Lists for note time storage
+        dTimes = new List<NoteTime>();
+        fTimes = new List<NoteTime>();
+        jTimes = new List<NoteTime>();
+        kTimes = new List<NoteTime>();
+    }
+
     public IEnumerator Start()
     {
         if (SongSelectionMenu.selectedSong != null)
@@ -141,6 +150,8 @@ public class JSONRead : MonoBehaviour
         //Establishes health and score values
         playerScore = 0;
         playerHealth = 50; //This currently means that 125 notes can be missed
+        finalScore = 0;
+        currentNoteTime = 0;
 
         //Establishes Action connections
         InputController.onDInput += DInputReception;
@@ -152,11 +163,7 @@ public class JSONRead : MonoBehaviour
         InputController.onJRelease += JReleaseReception;
         InputController.onKRelease += KReleaseReception;
 
-        //Establishes Lists for note time storage
-        dTimes = new List<NoteTime>();
-        fTimes = new List<NoteTime>();
-        jTimes = new List<NoteTime>();
-        kTimes = new List<NoteTime>();
+
 
         songInfo = JsonUtility.FromJson<SongInfo>(textJSON.text); //Possibly make the name of the json file serializable
         songNotes = songInfo.tracks[0].notes;
@@ -182,7 +189,7 @@ public class JSONRead : MonoBehaviour
                 AddingNotes = false; //Tells the loop to fuck off
                 if (currentNoteTime > (songInfo.tracks[0].duration + (2 * noteSpeedFactor))) //Ends the level if there are no more notes to generate, after the time of the song has ended, plus double the animation travel time, so that the final notes have time to be played
                 {
-                    Debug.Log((songInfo.tracks[0].duration + (2 * noteSpeedFactor)));
+                    //Debug.Log((songInfo.tracks[0].duration + (2 * noteSpeedFactor)));
                     EndLevel();
                 }
             }
@@ -193,7 +200,7 @@ public class JSONRead : MonoBehaviour
         if (dTimes.Count > 0 && (dTimes[0].time + goodTimeLeeway) < currentNoteTime)
         {
             dTimes.RemoveAt(0);
-            Debug.Log($"D dead {currentNoteTime}");
+            //Debug.Log($"D dead {currentNoteTime}");
             AdjustScore(0f, true); //Sends signal that a note was missed, potentially breaking a combo
             AdjustHealth(-1f); //Removes one health because a note was missed
             onPlayNote?.Invoke(ArrowType.D_LEFT, Accuracy.MISS); //D note deletion called for miss
@@ -256,7 +263,7 @@ public class JSONRead : MonoBehaviour
         if (note.name == "F4")//Implementation for spawning D notes goes here
         {
             onSpawnNote?.Invoke(ArrowType.D_LEFT);
-            Debug.Log($"D Shot {currentNoteTime}");
+            //Debug.Log($"D Shot {currentNoteTime}");
             NoteTime newTimeD = new NoteTime
             {
                 time = note.time + (noteSpeedFactor),
@@ -300,7 +307,7 @@ public class JSONRead : MonoBehaviour
         else if (note.name == "F#4")//Implementation for spawning D notes goes here
         {
             onSpawnNote?.Invoke(ArrowType.D_LEFT);
-            Debug.Log($"D Shot {currentNoteTime}");
+            //Debug.Log($"D Shot {currentNoteTime}");
             NoteTime newTimeD = new NoteTime
             {
                 time = note.time + (noteSpeedFactor),
@@ -365,11 +372,11 @@ public class JSONRead : MonoBehaviour
                 dTimes.RemoveAt(0);
             }
         }
-        else //Considers wrong note input otherwise
+        /*else //Considers wrong note input otherwise
         {
             AdjustScore(0f, true); //Sends signal that a note was missed, potentially breaking a combo
             AdjustHealth(-1f); //Removes one health for incorrect input
-        }
+        }*/
     }
 
     //This function is run when F button is pressed
@@ -379,7 +386,7 @@ public class JSONRead : MonoBehaviour
         {
             Accuracy passedAcc;
             float accuracy = Math.Abs(fTimes[0].time - currentNoteTime); //This value records how much time the user was away from hitting the note perfectly on time
-            Debug.Log("D Recep");
+            //Debug.Log("D Recep");
             passedAcc = RateNote(accuracy);
             if (passedAcc != Accuracy.MISS) //The note is rated and score/health values are properly adjusted, but if the note was found to be hit then it is removed from the time List
             {
@@ -396,11 +403,11 @@ public class JSONRead : MonoBehaviour
                 fTimes.RemoveAt(0);
             }
         }
-        else //Considers wrong note input otherwise
+        /*else //Considers wrong note input otherwise
         {
             AdjustScore(0f, true); //Sends signal that a note was missed, potentially breaking a combo
             AdjustHealth(-1f); //Removes one health for incorrect input
-        }
+        }*/
     }
 
     //This function is run when J button is pressed
@@ -410,7 +417,7 @@ public class JSONRead : MonoBehaviour
         {
             Accuracy passedAcc;
             float accuracy = Math.Abs(jTimes[0].time - currentNoteTime); //This value records how much time the user was away from hitting the note perfectly on time
-            Debug.Log("D Recep");
+            //Debug.Log("D Recep");
             passedAcc = RateNote(accuracy);
             if (passedAcc != Accuracy.MISS) //The note is rated and score/health values are properly adjusted, but if the note was found to be hit then it is removed from the time List
             {
@@ -427,11 +434,11 @@ public class JSONRead : MonoBehaviour
                 jTimes.RemoveAt(0);
             }
         }
-        else //Considers wrong note input otherwise
+        /*else //Considers wrong note input otherwise
         {
             AdjustScore(0f, true); //Sends signal that a note was missed, potentially breaking a combo
             AdjustHealth(-1f); //Removes one health for incorrect input
-        }
+        }*/
     }
 
     //This function is run when K button is pressed
@@ -441,7 +448,7 @@ public class JSONRead : MonoBehaviour
         {
             Accuracy passedAcc;
             float accuracy = Math.Abs(kTimes[0].time - currentNoteTime); //This value records how much time the user was away from hitting the note perfectly on time
-            Debug.Log("D Recep");
+            //Debug.Log("D Recep");
             passedAcc = RateNote(accuracy);
             if (passedAcc != Accuracy.MISS) //The note is rated and score/health values are properly adjusted, but if the note was found to be hit then it is removed from the time List
             {
@@ -458,11 +465,11 @@ public class JSONRead : MonoBehaviour
                 kTimes.RemoveAt(0);
             }
         }
-        else //Considers wrong note input otherwise
+        /*else //Considers wrong note input otherwise
         {
             AdjustScore(0f, true); //Sends signal that a note was missed, potentially breaking a combo
             AdjustHealth(-1f); //Removes one health for incorrect input
-        }
+        }*/
     }
 
     //Functions for release reception in order to calculate hold times for hold notes:
@@ -475,7 +482,7 @@ public class JSONRead : MonoBehaviour
             //onPlayNote?.Invoke(ArrowType.D_LEFT, Accuracy.PERFECT); //D note hold has ended - possibly add a rate function here to compare to the maximum possible hold time
             DHold = -1;
         }
-        Debug.Log("D Released");
+        //Debug.Log("D Released");
     }
 
     void FReleaseReception()
@@ -515,13 +522,15 @@ public class JSONRead : MonoBehaviour
         if (accuracy < successTimeLeeway) //Perfect note placement
         {
             AdjustScore(200f, true); //Gives 200 score for a perfect note
-            AdjustHealth(0.2f); //Gives the player 0.25 HP for a successful note placement
+            if (playerHealth < 50)
+                AdjustHealth(2f); //Gives the player 0.25 HP for a successful note placement
             return Accuracy.PERFECT; //Note was hit
         }
         else if (accuracy < greatTimeLeeway) //Great note placement
         {
-            AdjustScore(100f, true); //Gives 100 score for a great 
-            AdjustHealth(0.1f); //Gives the player 0.25 HP for a successful note placement
+            AdjustScore(100f, true); //Gives 100 score for a great note
+            if (playerHealth < 50)
+                AdjustHealth(1f); //Gives the player 0.25 HP for a successful note placement
             return Accuracy.GREAT; //Note was hit
         }
         else if (accuracy < goodTimeLeeway) //Good note placement
@@ -534,7 +543,7 @@ public class JSONRead : MonoBehaviour
         {
             AdjustScore(0f, true); //Sends signal that a note was missed, potentially breaking a combo
             AdjustHealth(-1f); //Removes one health for hitting a note early
-            Debug.Log("Early Input");
+            //Debug.Log("Early Input");
         }
         return Accuracy.MISS;
     }
@@ -558,12 +567,14 @@ public class JSONRead : MonoBehaviour
     //This function will also update 
     void AdjustHealth(float changeValue)
     {
+        Debug.Log($"{playerHealth}");
         playerHealth += changeValue;
-        /*if (playerHealth < 0)
+        if (playerHealth < 0)
         {
-            Debug.Log("Murder");
+            Debug.Log($"Murder {playerHealth}");
+            playerHealth = 50;
             EndLevel();
-        }*/
+        }
     }
 
     //This function is called when either the level has been completed or failed

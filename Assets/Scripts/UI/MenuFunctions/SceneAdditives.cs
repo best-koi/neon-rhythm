@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
 public class SceneAdditives : MonoBehaviour
@@ -23,6 +22,12 @@ public class SceneAdditives : MonoBehaviour
     {
         SceneManager.UnloadSceneAsync(str);
         
+    }
+
+    public static void LoadSceneWhileDestroyingTheMusic(string str, LoadSceneMode n) 
+    {
+        SceneManager.LoadScene(str, n);
+        Destroy(FindObjectOfType<AudioSource>());
     }
     
 }
